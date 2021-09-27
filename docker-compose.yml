@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  cti-frontend:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cti/frontend
+    restart: always
+    # environment:
+    #   - NODE_ENV=development
+    #   - CHOKIDAR_USEPOLLING=true
+    ports:
+      - "80:80"
+    volumes:
+      - ./log:/var/log/nginx
+    stdin_open: true
+    tty: true
