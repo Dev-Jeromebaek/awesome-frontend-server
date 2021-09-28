@@ -5,11 +5,11 @@ FROM node:current-alpine3.11 as builder
 RUN mkdir /srv/frontend
 WORKDIR /srv/frontend
 ENV PATH /srv/frontend/node_modules/.bin:$PATH
-COPY package.json /srv/frontend/package.json
+COPY app/package.json /srv/frontend/package.json
 RUN yarn install
 
 # 소스를 작업폴더로 복사하고 빌드
-COPY . /srv/frontend
+COPY app /srv/frontend
 RUN yarn build
 
 

@@ -1,18 +1,18 @@
 FROM node:latest
 
 # 작업 디렉토리 설정
-RUN mkdir /frontend
+RUN mkdir /srv/frontend
 
-#ADD . /frontend
+#ADD app /srv/frontend
 
-WORKDIR /frontend
+WORKDIR /srv/frontend
 
-ENV PATH /frontend/node_modules/.bin:$PATH
+ENV PATH /srv/frontend/node_modules/.bin:$PATH
 
-COPY package.json /frontend/package.json
-COPY yarn.lock /frontend/yarn.lock
+COPY app/package.json /srv/frontend/package.json
+COPY app/yarn.lock /srv/frontend/yarn.lock
 
-#COPY ./package.json yarn.lock ./
+#COPY app/package.json yarn.lock ./
 
 # package install
 RUN yarn install
@@ -20,7 +20,7 @@ RUN yarn install
 # project build
 #RUN yarn build
 
-COPY . /frontend
+COPY app /frontend
 
 #EXPOSE 3000
 CMD ["yarn", "start"]
